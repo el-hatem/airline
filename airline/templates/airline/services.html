@@ -1,0 +1,126 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'airline/css/reset.css' %}" type="text/css" media="all">
+<link rel="stylesheet" href="{% static 'airline/css/layout.css' %}" type="text/css" media="all">
+<link rel="stylesheet" href="{% static 'airline/css/style.css' %}" type="text/css" media="all">
+
+<script type="text/javascript" src="{% static 'airline/js/jquery-1.4.2.js' %}" ></script>
+<script type="text/javascript" src="{% static 'airline/js/cufon-yui.js' %}"></script>
+<script type="text/javascript" src="{% static 'airline/js/cufon-replace.js' %}"></script> 
+<script type="text/javascript" src="{% static 'airline/js/Myriad_Pro_italic_600.font.js' %}"></script>
+<script type="text/javascript" src="{% static 'airline/js/Myriad_Pro_italic_400.font.js' %}"></script>
+<script type="text/javascript" src="{% static 'airline/js/Myriad_Pro_400.font.js' %}"></script>
+{% endblock %}
+
+{% block main %}
+<main>
+<!-- header -->
+<div class="main">
+<!-- content -->
+	<section id="content">
+		<article class="col1">
+			<div class="pad_1">
+				<h2>Search for a Flight</h2>
+				<form id="form_1" action="{% url 'booksystem:flights' %}" method="post"> {% csrf_token %}
+					<div class="wrapper pad_bot1">
+						<div class="radio marg_right1">
+							<input type="radio" name="state" value="1" onclick="radioclicker(this);">Round Trip
+						</div>
+						<div class="radio">
+							<input type="radio" name="state" value="0" onclick="radioclicker(this);">One Way
+						</div>
+					</div>
+					<div class="wrapper">
+						From:
+						<div class="bg"><input type="text" name="origin" class="input input1" placeholder="Enter City or Airport Code"></div>
+					</div>
+					<div class="wrapper">
+						To:
+						<div class="bg"><input type="text" name="dist" class="input input1" placeholder="Enter City or Airport Code"></div>
+					</div>
+					<div class="wrapper">
+						Departure Date:
+						<div class="wrapper">
+							<div class="bg left"><input type="date" name="dept_date" data-date-format="YYYY-MM-DD" class="input input1" placeholder="mm/dd/yyyy"></div>
+						</div>
+					</div>
+					<div class="wrapper">
+						Return Date:
+						<div class="wrapper">
+							<div class="bg left"><input type="date" id="return_date" name="return_date" class="input input1" placeholder="mm/dd/yyyy" data-date-format="YYYY-MM-DD"></div>
+						</div>
+					</div>
+					<div class="wrapper">
+						Budget:
+						<div class="wrapper">
+							<div class="bg left">
+							    <span style="position:absolute;">
+							    <span id="myValue" style="padding: 0 auto;"></span>
+							    </span>
+							    <input type="range" name="price__lte" class="input input1" id="myRange" max="1000" min="50" step="0.01"> 
+							</div>
+						</div>
+					</div>
+					<div class="wrapper">
+						<p>Class:</p>
+						<div class="bg left">
+							<select name='trip_class'>
+								<option value="0" selected disabled>Select a trip type</option>
+								<option value="1">Economics</option>
+								<option value="2">Business</option>
+								<option value="3">Family Trip</option>
+								<option value="4">volunteering</option>
+								<option value="5">Tourism</option>
+							</select>
+						</div>
+						<button class="button2" type="submit">Find!</button>
+					</div>
+				</form>
+				<h2>Did You Know Us?</h2>
+				<p><strong>International Consolidated Airlines Group S.A.</strong>, usually shortened to IAG, is an Anglo-Spanish multinational airline holding company with its registered office in Madrid, Spain, and its global headquarters in London, England.... </p>
+				<div class="wrapper pad_bot2"><a href="#" class="button2">Read More</a></div>
+			</div>
+		</article>
+		<article class="col2 pad_left1">
+			<h2>Aircraft Sales</h2>
+			<div class="wrapper">
+				<figure class="left marg_right1"><img src="{% static 'airline/images/page2_img1.jpg' %}" alt=""></figure>
+				<p><strong>Aircraft sales</strong> can often be too complicated and tiresome. Fundamentally, successful Aircraft Sales are built & executed on Trust & Clarity. Trust & Clarity must be established and dependent upon through all facets of the Deal & Sale process for all entities involved.</p>
+			</div>
+			<p>At Jet Connections, we are continuously evolving our business practices and offerings. Looking at the current developments in the Aviation Market, we understand times are callous. The COVID-19 Pandemic has changed how Business Aviation is conducted now & moving into the foreseeable future. As a result, on top of our already rigorous & transparent Aircraft Sale Process, we have decided to introduce a new Flat-Fee Policy for all Aircraft Sales. Our unique process has been designed for you, the Seller, to get the best possible deal.</p>
+
+			<p>We would love to talk to you to discover your needs. Get in touch with our sales team today to discuss your Aircraft Sale. We look forward to having a great conversation on:</p>
+			<div class="wrapper pad_bot1">
+				<ul class="list1 cols marg_right1">
+					<li><a href="#">facebook page</a></li>
+					<li><a href="#">twitter</a></li>
+					<li><a href="#">Discord</a></li>
+				</ul>
+			</div>
+			<div class="wrapper"><a href="#" class="button1">Read More</a></div>
+			<h2>Aircraft Management</h2>
+			<div class="wrapper">
+				<figure class="right marg_left1"><img src="{% static 'airline/images/page2_img2.jpg' %}" alt=""></figure>
+				<p><strong>Delivering updated information</strong>Aviation safety is the study and practice of managing risks in aviation. This includes preventing aviation accidents and incidents through research, educating air travel personnel, passengers and the general public, as well as the design of aircraft and aviation infrastructure. The aviation industry is subject to significant regulation and oversight.</p>
+				<p><strong>Non provident</strong>, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus omnis.</p>
+			</div>
+		</article>
+	</section>
+<!-- / content -->
+</div>
+<script type="text/javascript" src="{% static 'airline/js/script.js' %}"></script>
+<script type="text/javascript">
+function radioclicker(radio) {
+	var date = document.querySelector('#return_date');
+    if (radio.value == 0) {
+    	date.disabled = true;
+    } else if (radio.value == 1){
+    	date.disabled = false;
+    }
+}
+
+</script>
+</main>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'airline/css/reset.css' %}" type="text/css" media="all">
+<link rel="stylesheet" href="{% static 'airline/css/layout.css' %}" type="text/css" media="all">
+<link rel="stylesheet" href="{% static 'airline/css/style.css' %}" type="text/css" media="all">
+
+<script type="text/javascript" src="{% static 'airline/js/jquery-1.4.2.js' %}" ></script>
+<script type="text/javascript" src="{% static 'airline/js/cufon-yui.js' %}"></script>
+<script type="text/javascript" src="{% static 'airline/js/cufon-replace.js' %}"></script> 
+<script type="text/javascript" src="{% static 'airline/js/Myriad_Pro_italic_600.font.js' %}"></script>
+<script type="text/javascript" src="{% static 'airline/js/Myriad_Pro_italic_400.font.js' %}"></script>
+<script type="text/javascript" src="{% static 'airline/js/Myriad_Pro_400.font.js' %}"></script>
+{% endblock %}
+
+
+{% block main %}
+<main>
+<!-- / header -->
+<div class="main">
+<!-- content -->
+	<section id="content">
+		<article class="col1">
+			<div class="pad_1">
+				<h2>Contact Us</h2>
+				<span class="cols">
+					Country: Egypt<br>
+					City: Zagazig<br>
+					Telephone: +201016909285<br>
+					Email: <a href="mailto:">contact@airlines.com</a><br>
+				</span>
+				<span class="cols">
+				<h2>Miscellaneous Info</h2>
+				<p>If you think your organisation or association would be of interest to Airlines VIP memebers and would like to be listed here, please contact the Airline customer services. Listing is at the discretion of the Airlines and is restricted to non-commercial organisations in the general field of consumer, market and marketing research.</p>
+				</span>
+			</div>
+		</article>
+		<article class="col2 pad_left1">
+			<h2>Contact Us</h2>
+			<form id="ContactForm" action="">
+				<div>
+					<div class="wrapper">
+						<div class="bg"><input type="text" class="input" /></div>
+						Your Name:<br />
+					</div>
+					<div class="wrapper">
+						<div class="bg"><input type="text" class="input" /></div>
+						Your E-mail:<br />
+					</div>
+					<div class="wrapper">
+						<div class="bg">
+							<textarea name="textarea" cols="1" rows="1"></textarea>
+						</div>
+						Your Message:<br />
+					</div>
+					<a href="#" class="button1" onClick="document.getElementById('ContactForm').submit()">submit</a>
+					<a href="#" class="button1" onClick="document.getElementById('ContactForm').reset()">reset</a>
+				</div>
+			</form>
+		</article>
+	</section>
+<!-- / content -->
+</div>	
+</main>
+
+{% endblock %}

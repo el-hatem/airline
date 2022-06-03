@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/06bbb940-d097-49ee-9f3b-a7e88e0fc15b/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/airbookings",
+    "appService.deploySubpath": "."
+}

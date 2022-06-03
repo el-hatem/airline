@@ -1,0 +1,62 @@
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.js"></script>
+<div class="modal fade" id="edit-ticket{{obj.id}}">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-body">
+          <table id="flights{{obj.id}}" class="col-sm-12 table" cellspacing="0" width="100%">
+              <thead>
+                  <th>Flight ID
+                  </th>
+                  <th>Departure
+                  </th>
+                  <th>Return
+                  </th>
+                  <th>Action
+                  </th>
+                 </tr>
+              </thead>
+              <tbody>
+              {% for flight in obj|available_flights %}
+              <tr>
+
+                <td>{{flight.id}}</td>
+                <td>
+                  {{flight.dept_date}}<br>
+                  {{flight.dept_time}}
+                </td>
+                <td>
+                {{flight.return_date}}<br>
+                {{flight.return_time}}
+              </td>
+              <td>
+                <form id="form{{obj.id}}-{{flight.id}}" action="{% url 'booksystem:delay' obj.id flight.id %}" role='form'  method="post">{% csrf_token %}
+                  <button type="submit" id="btn{{obj.id}}-{{flight.id}}" class="col btn btn-warning col-sm-12 mb-2">delay</button>
+                </form>
+              </td>
+            
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+  </div>
+</div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+ 
+<script type="text/javascript">
+  $(document).ready(function () {
+$('#flights{{obj.id}}').DataTable({
+    searchPanes: true,
+    "oLanguage": {
+        "sEmptyTable": "No Previous payments"
+      },
+      'lengthMenu': [[1, 2, 4, 6, -1], [1, 2, 4, 6, 'All']]
+  });
+$('.dataTables_length').addClass('bs-select');
+});
+</script>

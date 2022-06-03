@@ -1,0 +1,132 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'airline/css/reset.css' %}" type="text/css" media="all">
+<link rel="stylesheet" href="{% static 'airline/css/layout.css' %}" type="text/css" media="all">
+<link rel="stylesheet" href="{% static 'airline/css/style.css' %}" type="text/css" media="all">
+
+<script type="text/javascript" src="{% static 'airline/js/jquery-1.4.2.js' %}" ></script>
+<script type="text/javascript" src="{% static 'airline/js/cufon-yui.js' %}"></script>
+<script type="text/javascript" src="{% static 'airline/js/cufon-replace.js' %}"></script> 
+<script type="text/javascript" src="{% static 'airline/js/Myriad_Pro_italic_600.font.js' %}"></script>
+<script type="text/javascript" src="{% static 'airline/js/Myriad_Pro_italic_400.font.js' %}"></script>
+<script type="text/javascript" src="{% static 'airline/js/Myriad_Pro_400.font.js' %}"></script>
+{% endblock %}
+{% block main %}
+
+<main>
+<!-- / header -->
+<div class="main">
+<!-- content -->
+	<section id="content">
+		<article class="col1">
+			<div class="pad_1">
+				<h2>Search for a Flight</h2>
+				<form id="form_1" action="{% url 'booksystem:flights' %}" method="post"> {% csrf_token %}
+					<div class="wrapper pad_bot1">
+						<div class="radio marg_right1">
+							<input type="radio" name="state" value="1" onclick="radioclicker(this);">Round Trip
+						</div>
+						<div class="radio">
+							<input type="radio" name="state" value="0" onclick="radioclicker(this);">One Way
+						</div>
+					</div>
+					<div class="wrapper">
+						From:
+						<div class="bg"><input type="text" name="origin" class="input input1" placeholder="Enter City or Airport Code"></div>
+					</div>
+					<div class="wrapper">
+						To:
+						<div class="bg"><input type="text" name="dist" class="input input1" placeholder="Enter City or Airport Code"></div>
+					</div>
+					<div class="wrapper">
+						Departure Date:
+						<div class="wrapper">
+							<div class="bg left"><input type="date" name="dept_date" data-date-format="YYYY-MM-DD" class="input input1" placeholder="mm/dd/yyyy"></div>
+						</div>
+					</div>
+					<div class="wrapper">
+						Return Date:
+						<div class="wrapper">
+							<div class="bg left"><input type="date" id="return_date" name="return_date" class="input input1" placeholder="mm/dd/yyyy" data-date-format="YYYY-MM-DD"></div>
+						</div>
+					</div>
+					<div class="wrapper">
+						Budget:
+						<div class="wrapper">
+							<div class="bg left">
+							    <span style="position:absolute;">
+							    <span id="myValue" style="padding: 0 auto;"></span>
+							    </span>
+							    <input type="range" name="price__lte" class="input input1" id="myRange" max="1000" min="50" step="0.01"> 
+							</div>
+						</div>
+					</div>
+					<div class="wrapper">
+						<p>Class:</p>
+						<div class="bg left">
+							<select name='trip_class'>
+								<option value="0" selected disabled>Select a trip type</option>
+								<option value="1">Economics</option>
+								<option value="2">Business</option>
+								<option value="3">Family Trip</option>
+								<option value="4">volunteering</option>
+								<option value="5">Tourism</option>
+							</select>
+						</div>
+						<button class="button2" type="submit">Find!</button>
+					</div>
+				</form>
+				<h2>Among the Benefits</h2>
+				<ul class="list1 pad_bot1">
+					<li><a href="#">Vacation benifits</a></li>
+					<li><a href="#">financial benefits</a></li>
+					<li><a href="#">Healthcare benifits</a></li>
+					<li><a href="#">Social &amp; Business benifits</a></li>
+					<li><a href="#">accident and disability coverage</a></li>
+					<li><a href="#">unlimited travel privileges</a></li>
+				</ul>
+				<div class="wrapper pad_bot2"><a href="#" class="button2">Read More</a></div>
+			</div>
+		</article>
+		<article class="col2 pad_left1">
+			<h2>A Premier Air Charter Services Broker</h2>
+			<div class="wrapper">
+				<figure class="left marg_right1"><img src="{% static 'airline/images/page4_img1.jpg' %}" alt=""></figure>
+				<p><strong>Air Charter Service </strong>is a global aircraft charter provider with 29 offices around the world in:</p>
+				<ul class="list1 left pad_bot1">
+					<li><a href="#">Australia/Oceania Offices</a></li>
+					<li><a href="#">Africa Offices</a></li>
+					<li><a href="#">Asia Offices</a></li>
+					<li><a href="#">Europe Offices</a></li>
+					<li><a href="#">North/South of America Offices</a></li>
+				</ul>
+			</div>
+			<p>As a brokerage, Air Charter Service does not own any aircraft, but arranges helicopter, private jet, commercial airline, and cargo aircraft charters. Additional services include Jet Cards for its private jets division, Onboard Couriers and Travel & Concierge.</p>
+			<div class="wrapper"><a href="#" class="button1">Read More</a></div>
+			<h2>Aircraft for Charter</h2>
+			<div class="wrapper">
+				<figure class="left marg_right1"><img src="{% static 'airline/images/page4_img2.jpg' %}" alt=""></figure>
+				<p>The security and wellbeing of our clients are absolutely paramount. We guarantee that every jet charter is in accordance with the rigorous worldwide standards set by the Civil Aviation Authority. All crew are highly experienced and trained in the most current safety.</p>
+				<p>We utilise one of the world’s largest private jet fleet and turboprops. We operate with the highest standards of safety and service in private aviation. Our reliability, cost, attentiveness and multilingual staff enables us to surpass the competition.</p>
+			</div>
+		</article>
+	</section>
+<!-- / content -->
+</div>	
+<script type="text/javascript" src="{% static 'airline/js/script.js' %}"></script>
+<script type="text/javascript">
+function radioclicker(radio) {
+	var date = document.querySelector('#return_date');
+    if (radio.value == 0) {
+    	date.disabled = true;
+    } else if (radio.value == 1){
+    	date.disabled = false;
+    }
+}
+
+</script>
+</main>
+
+{% endblock %}

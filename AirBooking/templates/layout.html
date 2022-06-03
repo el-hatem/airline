@@ -1,0 +1,75 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title></title>
+<meta charset="utf-8">
+{%block links %}
+{% endblock %}
+
+<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!--[if lt IE 9]>
+    <script type="text/javascript" src="http://info.template-help.com/files/ie6_warning/ie6_script_other.js"></script>
+    <script type="text/javascript" src="js/html5.js"></script>
+<![endif]-->
+</head>
+<body id="page1">
+<div class="body1">
+    <div class="main">
+<!-- header -->
+        <header>
+            <div class="wrapper">
+                <h1>
+                    <a href="{% url 'airline:index' %}" id="logo">Air Lines</a><span id="slogan">International Travel</span>
+                </h1>
+                <div class="right">
+                    <nav>
+                        <ul id="top_nav">
+                            {% if user.is_authenticated %}
+                                <li><a href="{% url 'users:profile' %}" style="color:white;" class="fa fa-user"> welcome {{request.user.username}}</a></li>
+                                <li><a href="{% url 'users:logout' %}" style="color:white;" class="fa fa-lock"> Logout</a></li>
+                            {% else %}
+                                <li><a href="{% url 'users:register' %}" style="color:white;" class="fa fa-address-card"> Register</a></li>
+                                <li><a href="{% url 'users:login' %}" style="color:white;" class="fa fa-user"> Login</a></li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                    <nav>
+                        <ul id="menu">
+                            <li><a href="{% url 'airline:index' %}">Home</a></li>
+                            <li><a href="{% url 'airline:services' %}">Services</a></li>
+                            <li><a href="{% url 'airline:safety' %}">Safety</a></li>
+                            <li><a href="{% url 'airline:charters' %}">Charters</a></li>
+                            <li><a href="{% url 'airline:contacts' %}">Contacts</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+    </div>
+</div>
+<div class="main">
+    <div id="banner">
+        <div class="text1">
+            COMFORT<span>Guaranteed</span><p><b>The airline reservation system is a web-based booking solution that helps in consolidating data from all airlines through the use of global distribution systems</b></p>
+        </div>
+        <a href="{% url 'booksystem:search' %}" class="button_top">Book Ticket Now!!</a>
+    </div>
+</div>
+
+{% block main %}{% endblock %}
+
+<div class="body2">
+    <div class="main">
+<!-- footer -->
+        <footer>
+            <a href="https://airbookings.azurewebsites.net" target="_blank" rel="nofollow">airbookings.azurewebsites.net</a>
+        </footer>
+<!-- / footer -->
+    </div>
+</div>
+<script type="text/javascript"> Cufon.now(); </script>
+</body>
+</html>

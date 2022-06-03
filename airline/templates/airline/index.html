@@ -1,0 +1,197 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'airline/css/reset.css' %}" type="text/css" media="all">
+<link rel="stylesheet" href="{% static 'airline/css/layout.css' %}" type="text/css" media="all">
+<link rel="stylesheet" href="{% static 'airline/css/style.css' %}" type="text/css" media="all">
+
+<script type="text/javascript" src="{% static 'airline/js/jquery-1.4.2.js' %}" ></script>
+<script type="text/javascript" src="{% static 'airline/js/cufon-yui.js' %}"></script>
+<script type="text/javascript" src="{% static 'airline/js/cufon-replace.js' %}"></script> 
+<script type="text/javascript" src="{% static 'airline/js/Myriad_Pro_italic_600.font.js' %}"></script>
+<script type="text/javascript" src="{% static 'airline/js/Myriad_Pro_italic_400.font.js' %}"></script>
+<script type="text/javascript" src="{% static 'airline/js/Myriad_Pro_400.font.js' %}"></script>
+{% endblock %}
+
+{% block main %}
+<main>
+<!-- / header -->
+<div class="main">
+<!-- content -->
+	<section id="content">
+		<article class="col1">
+			<div class="pad_1">
+				<h2>Search for a Flight</h2>
+				<form id="form_1" action="{% url 'booksystem:flights' %}" method="post"> {% csrf_token %}
+					<div class="wrapper pad_bot1">
+						<div class="radio marg_right1">
+							<input type="radio" name="state" value="1" onclick="radioclicker(this);">Round Trip
+						</div>
+						<div class="radio">
+							<input type="radio" name="state" value="0" onclick="radioclicker(this);">One Way
+						</div>
+					</div>
+					<div class="wrapper">
+						From:
+						<div class="bg"><input type="text" name="origin" class="input input1" placeholder="Enter City or Airport Code"></div>
+					</div>
+					<div class="wrapper">
+						To:
+						<div class="bg"><input type="text" name="dist" class="input input1" placeholder="Enter City or Airport Code"></div>
+					</div>
+					<div class="wrapper">
+						Departure Date:
+						<div class="wrapper">
+							<div class="bg left"><input type="date" id="dept_date" name="dept_date" data-date-format="YYYY-MM-DD" class="input input1"  placeholder="mm/dd/yyyy"></div>
+						</div>
+					</div>
+					<div class="wrapper">
+						Return Date:
+						<div class="wrapper">
+							<div class="bg left"><input type="date" id="return_date" name="return_date" class="input input1" placeholder="mm/dd/yyyy" data-date-format="YYYY-MM-DD"></div>
+						</div>
+					</div>
+					<div class="wrapper">
+						Budget:
+						<div class="wrapper">
+							<div class="bg left">
+							    <span style="position:absolute;">
+							    <span id="myValue" style="padding: 0 auto;"></span>
+							    </span>
+							    <input type="range" name="price__lte" class="input input1" id="myRange" max="1000" min="50" step="0.01"> 
+							</div>
+						</div>
+					</div>
+					<div class="wrapper">
+						<p>Class:</p>
+						<div class="bg left">
+							<select name='trip_class'>
+								<option value="0" selected disabled>Select a trip type</option>
+								<option value="1">Economics</option>
+								<option value="2">Business</option>
+								<option value="3">Family Trip</option>
+								<option value="4">volunteering</option>
+								<option value="5">Tourism</option>
+							</select>
+						</div>
+						<button class="button2" type="submit">Find!</button>
+					</div>
+				</form>
+				<h2>Recent News</h2>
+				<p class="under"><a href="#" class="link1">Passenger travel is back, but stock market investors haven’t stuck with airlines in the past</a><br>November 5, 2021</p>
+				<p class="under"><a href="#" class="link1">Southwest Airlines says travel demand is improving, forecasts fourth-quarter profit</a><br>November 1, 2021</p>
+				<p><a href="#" class="link1">American Airlines CEO Parker to retire in March, President Isom to take reins</a><br>October 23, 2021</p>
+				<p><a href="#" class="link1">Delta doubles down on pre-pandemic international airline investment strategy</a><br>October 16, 2021</p>
+				<p><a href="#" class="link1">Breaking: Stop bringing Nigerians to our country, United Arab Emirates tells foreign airlines</a><br>October 3, 2021</p>
+			</div>
+		</article>
+		<article class="col2 pad_left1">
+			<h2>Welcome to our Website!</h2>
+			<p class="color1"> Airlines has airline tickets, cheap flights, vacation packages and  Airlines Advantage bonus mile offers at <a href="https://airbookings.azurewebsites.net">airbookings.azurewebsites.net</a>.</p>
+			<div class="marker">
+				<div class="wrapper">
+					<p class="pad_bot2"><strong>Services</strong></p>
+					<p class="pad_bot2">Aircraft Services Group (ASG) was formed by aircraft owners seeking transparency in the operation and management of their aircraft...</p>
+				</div>
+			</div>
+			<div class="wrapper pad_bot2"><a href="#" class="button1">Read More</a></div>
+			<div class="marker">
+				<div class="wrapper">
+					<p class="pad_bot2"><strong>Charters</strong></p>
+					<p class="pad_bot2">World Leading Air Charter Solutions. Global Coverage. Speak to Our Experts. A Proven Reputation for Innovation, Expertise and Professionalism. Multilingual Experts. Offices Worldwide...</p>
+				</div>
+			</div>
+			<div class="wrapper pad_bot2">
+				<a href="#" class="button1">Reed more</a>
+			</div>
+			<div class="marker">
+				<div class="wrapper">
+					<p class="pad_bot2"><strong>Safety</strong></p>
+					<p class="pad_bot2">Airline safety is important to ensure a successful trip and vacation. Listen to this conversation on the topic...</p>
+				</div>
+			</div>
+			<div class="wrapper pad_bot2">
+				<a href="#" class="button1">Reed more</a>
+			</div>
+			<div class="wrapper">
+				<article class="cols">
+					<h2>Clients Policy</h2>
+					<p>International Travels Airlines respects your privacy. This Policy discloses privacy practices for your information collected online or offline.</p>
+					<p>Except for our internet only fares, we will offer the lowest fare for which you are eligible for the flight, date and class of service you request through our telephone reservation system; at airport ticket counters; and at city ticket offices.</p>
+					<p>There may be times when weather, air traffic control, operational or service considerations lead to flight delays, cancellations or diversions. When this happens we will make available the most current, accurate information about your flight’s status.</p>
+
+				</article>
+				<div class="box1">
+					<div class="pad_1">
+						<div class="wrapper">
+							<p class="pad_bot2">Fantastic Experience with potential for growth </p>
+							<p><span class="right">Mr. Thomas Lloyd</span>&nbsp;<br></p>
+						</div>
+					</div>
+				</div>
+				<div class="box1">
+					<div class="pad_1">
+						<div class="wrapper">
+							<p class="pad_bot2">Wonderful help from staff to straighten out booking mix-up </p>
+							<p><span class="right">Mrs. Jean Adam</span>&nbsp;<br></p>
+						</div>
+					</div>
+				</div>
+				<div class="box1">
+					<div class="pad_1">
+						<div class="wrapper">
+							<p class="pad_bot2">Excellent flight and services </p>
+							<p><span class="right">Mr. James Jackson</span>&nbsp;<br></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</article>
+	</section>
+<!-- / content -->
+</div>	
+</main>
+<script type="text/javascript" src="{% static 'airline/js/script.js' %}"></script>
+
+<script type="text/javascript">
+function radioclicker(radio) {
+	var date = document.querySelector('#return_date');
+    if (radio.value == 0) {
+    	date.disabled = true;
+    } else if (radio.value == 1){
+    	date.disabled = false;
+    }
+}
+
+</script>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+<script type="text/javascript">
+// Use Javascript
+let today = new Date();
+let dd = today.getDate();
+let mm = today.getMonth()+1; //January is 0 so need to add 1 to make it 1!
+let yyyy = today.getFullYear();
+if(dd<10){
+  dd='0'+dd
+} 
+if(mm<10){
+  mm='0'+mm
+} 
+today = yyyy+'-'+mm+'-'+dd;
+$('#dept_date').on('click', ()=>{
+	$('#dept_date').attr('min', today);
+})
+$('#return_date').on('click', ()=>{
+	if ($('#dept_date').val()){
+		$('#return_date').attr('min', $('#dept_date').val());
+	} else {
+		$('#return_date').attr('min', today);
+	}
+	console.log();
+})
+
+</script>
+{% endblock %}

@@ -1,0 +1,36 @@
+	<div class="modal fade" id="delete-ticket{{obj.id}}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+					    <div class="text-right"> <i class="fa fa-close close" data-dismiss="modal"></i> </div>
+					  	<div class="tabs mt-3">
+              <div class="card">
+                <div class="card-body">
+                  <div class="form-group">
+                    <p><small class="text-muted"><label class="text-danger">Warning</label> you will cancel the flight. sure about that?.Please enter <strong>"yes"</strong> in the fllowing textbox</small></p>
+                  </div>
+                  <div class="form-group">
+                    <form id="form{{obj.id}}" role="form" action="{% url 'booksystem:delete_payment' obj.id %}" method="post"> {% csrf_token %}
+                    <div class="input-group input-group-sm mb-3">
+                      <input type="text" id="delete{{obj.id}}" name="delete{{obj.id}}" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                    </div>
+                    <button type="submit" id="btndlt{{obj.id}}" class="col btn btn-danger col-sm-12 mb-2" disabled="true">Delete</button>
+                    <script type="text/javascript">
+                      document.querySelector('#delete{{obj.id}}').addEventListener('keyup', ()=>{
+                        let b = document.querySelector('#btndlt{{obj.id}}');
+                          if (document.querySelector('#delete{{obj.id}}').value === 'yes'){
+                            b.disabled = false;
+                          } else {b.disabled = true;}
+                      });
+                    </script>
+                    </form>
+                    <button type="button" class="col btn btn-secondary col-sm-12 mb-2" data-dismiss="modal">cancle</button>
+                  </div>
+                </div>
+              </div>
+
+				</div>
+			</div>
+		</div>
+</div>
+</div>

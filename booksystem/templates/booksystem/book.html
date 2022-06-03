@@ -1,0 +1,194 @@
+{% extends "booksystem/layout.html" %}
+{% load static %}
+
+{% block link %} 
+<link rel="stylesheet" href="{% static 'booksystem/css/main.css' %}" type="text/css" media="all">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+{% endblock %}
+{% block main %}
+<main>
+<div class="container">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="payment-card">
+                <i class="fa fa-cc-visa payment-icon-big text-success"></i>
+                <h2>
+                    **** **** **** 1060
+                </h2>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <small>
+                            <strong>Expiry date:</strong> 10/16
+                        </small>
+                    </div>
+                    <div class="col-sm-6 text-right">
+                        <small>
+                            <strong>Name:</strong> Osama Azzab
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="payment-card">
+                <i class="fa fa-cc-mastercard payment-icon-big text-warning"></i>
+                <h2>
+                    **** **** **** 7002
+                </h2>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <small>
+                            <strong>Expiry date:</strong> 10/16
+                        </small>
+                    </div>
+                    <div class="col-sm-6 text-right">
+                        <small>
+                            <strong>Name:</strong> Omar Elsayed
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="payment-card">
+                <i class="fa fa-cc-discover payment-icon-big text-danger"></i>
+                <h2>
+                    **** **** **** 3466
+                </h2>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <small>
+                            <strong>Expiry date:</strong> 10/16
+                        </small>
+                    </div>
+                    <div class="col-sm-6 text-right">
+                        <small>
+                            <strong>Name:</strong> Ahmed Hatem
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+
+        <div class="col-lg-12">
+
+            <div class="ibox">
+                <div class="ibox-title">
+                    Payment method
+                </div>
+                <div class="ibox-content">
+                    {% include 'includes/message.html' %}
+                    <div class="panel-group payments-method" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="pull-right">
+                                    <i class="fa fa-cc-amex text-success"></i>
+                                    <i class="fa fa-cc-mastercard text-warning"></i>
+                                    <i class="fa fa-cc-discover text-danger"></i>
+                                </div>
+                                <h5 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Credit Card</a>
+                                </h5>
+                            </div>
+                            <div id="collapseTwo" class="panel-collapse collapse in">
+                                <div class="panel-body">
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                          <div class="card">
+                                            <label style="text-align: center;">
+                                           <img src="{{flight.airline.image}}" class="card-img-top" alt="airline image" width="70"> 
+                                              {{flight.airline.name}}
+                                            </label>
+                                            <div class="card-body">
+                                              <h5 class="card-title"><strong>Flight code</strong>: {{flight.code}}</h5>
+                                              <button type="button" class="btn btn-success mb-1">price: {{flight.price}}$</button>
+                                              <p class="card-text">This is a {{states|get_item:flight.state}} Flight from {{flight.origin}} with supporting {{classes|get_item:flight.trip_class}} class options heading to {{flight.dist}} with additional services.<br>
+                                              <small class="fa fa-plane"> Departure: {{flight.dept_date}}, {{flight.dept_time}}</small><small class="fa fa-exchange"> Returned: {{flight.return_date}}, {{flight.return_time}}</small>
+                                              </p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                          {% if not request.user.card %}
+                                            <h1>you have no cards for your account. click <a href="{% url 'users:profile' %}">here</a> to add one</h1>
+                                          {% else %}
+                                            <form role="form" id="payment-form" action="{% url 'booksystem:book' flight.id %}" method="post"> {% csrf_token %}
+                                               <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <div class="form-group">
+                                                            <label>CARD OWNER</label>
+                                                            <div class="input-group">
+                                                                <input type="text" value="{{request.user.card.cardowner}}" class="form-control" name="owner" placeholder="Valid Card Number" required="" readonly="">
+                                                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <div class="form-group">
+                                                            <label>CARD NUMBER</label>
+                                                            <div class="input-group">
+                                                                <input type="cardnumber" value="{{request.user.card.cardnumber}}" class="form-control" name="Number" placeholder="Valid Card Number" required="" pattern="^(?:(4[0-9]{12}(?:[0-9]{3})?)|(5[1-5][0-9]{14})|(6(?:011|5[0-9]{2})[0-9]{12})|)$" title="please insert a valid card number" readonly="">
+                                                                <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-6 col-md-6">
+                                                        <div class="form-group">
+                                                            <label>EXPIRATION DATE</label>
+                                                            {% if request.user.card.expired_date.month < 10 %}
+                                                            <input type="month" class="form-control" name="Expiry" value="{{request.user.card.expired_date.year}}-0{{request.user.card.expired_date.month}}" placeholder="MM / YY" required="" readonly="">
+                                                            {% else %}
+                                                            <input type="month" class="form-control" name="Expiry" value="{{request.user.card.expired_date.year}}-{{request.user.card.expired_date.month}}" placeholder="MM / YY" required="" readonly="">
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-3 col-md-3">
+                                                        <div class="form-group">
+                                                            <label>CV CODE</label>
+                                                            <input type="password" value="{{request.user.card.cvv}}" class="form-control" name="CVC" placeholder="CVC" required="" maxlength='3' minlength='3' pattern = "[0-9]+" title="insert valid CVC number" readonly="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-3 col-md-3">
+                                                        <div class="form-group">
+                                                            <label>Number of Tickets</label>
+                                                            <input type="number" value="1" class="form-control" name="amount" placeholder="amount" required=""  min='1'>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-3">
+                                                        <button class="btn btn-primary" type="submit">Make a payment!</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                          {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</main>
+{% endblock %}

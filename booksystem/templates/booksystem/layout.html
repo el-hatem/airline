@@ -1,0 +1,63 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title></title>
+<meta charset="utf-8">
+
+<link rel="stylesheet" href="{% static 'booksystem/css/reset.css' %}" type="text/css" media="all">
+<link rel="stylesheet" href="{% static 'booksystem/css/style.css' %}" type="text/css" media="all">
+<script type="text/javascript" src="{% static 'booksystem/js/jquery-1.4.2.js' %}" ></script>
+<script type="text/javascript" src="{% static 'booksystem/js/cufon-yui.js' %}"></script>
+<script type="text/javascript" src="{% static 'booksystem/js/cufon-replace.js' %}"></script> 
+<script type="text/javascript" src="{% static 'booksystem/js/Myriad_Pro_italic_600.font.js' %}"></script>
+<script type="text/javascript" src="{% static 'booksystem/js/Myriad_Pro_italic_400.font.js' %}"></script>
+<script type="text/javascript" src="{% static 'booksystem/js/Myriad_Pro_400.font.js' %}"></script>
+
+<link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">   
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<link rel="stylesheet" 
+href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"></style>
+<script type="text/javascript" 
+src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" 
+src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<!--[if lt IE 9]>
+    <script type="text/javascript" src="http://info.template-help.com/files/ie6_warning/ie6_script_other.js"></script>
+    <script type="text/javascript" src="js/html5.js"></script>
+<![endif]-->
+{% block link %}{% endblock %}
+
+</head>
+<body id="page1">
+<div class="body1">
+    <div class="main">
+<!-- header -->
+        <header>
+            <div class="wrapper">
+                <h1>
+                    <a href="{% url 'airline:index' %}" id="logo">Air Lines</a><span id="slogan" style="color: #fff; font-size: 24px;">International Travel</span>
+                </h1>
+            </div>
+        </header>
+    </div>
+</div>
+
+{% block main %} {% endblock %}
+
+
+<div>
+    <div class="main">
+<!-- footer -->
+        <footer>
+            <a href="https://airbookings.azurewebsites.net" target="_blank" rel="nofollow">airbookings.azurewebsites.net</a>
+        </footer>
+<!-- / footer -->
+    </div>
+</div>
+<script type="text/javascript"> Cufon.now(); </script>
+</body>
+</html>
